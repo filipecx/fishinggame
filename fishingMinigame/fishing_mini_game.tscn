@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccbnf7u8tf1pe"]
+
+[ext_resource type="Script" path="res://fishingMinigame/fishing_mini_game.gd" id="1_hftyo"]
+[ext_resource type="Resource" uid="uid://duarkwn0rixj4" path="res://inventory/Items/fish.tres" id="2_8d57o"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_5b2ao"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_oqd7i"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_2fpp2"]
+
+[node name="Fishing MiniGame" type="Node2D"]
+script = ExtResource("1_hftyo")
+item = ExtResource("2_8d57o")
+
+[node name="Background" type="Sprite2D" parent="."]
+self_modulate = Color(0.362258, 0.355543, 0.912703, 1)
+position = Vector2(967.125, 311.375)
+scale = Vector2(60.25, 474.75)
+texture = SubResource("CanvasTexture_5b2ao")
+
+[node name="Hook" type="Sprite2D" parent="."]
+self_modulate = Color(0.690488, 0.644985, 5.77569e-07, 1)
+position = Vector2(969.25, 304.75)
+scale = Vector2(59.5, 51.5)
+texture = SubResource("CanvasTexture_oqd7i")
+
+[node name="FishIndicator" type="Sprite2D" parent="."]
+position = Vector2(967, 303)
+scale = Vector2(31.5, 15.5)
+texture = SubResource("CanvasTexture_2fpp2")
+
+[node name="TopPivot" type="Node2D" parent="."]
+position = Vector2(966, 102)
+
+[node name="BottomPivot" type="Node2D" parent="."]
+position = Vector2(964, 516)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

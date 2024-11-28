@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpiiku4hiji51"]
+
+[ext_resource type="Script" path="res://Jangada/character_body_3d.gd" id="1_t78xo"]
+[ext_resource type="PackedScene" uid="uid://ckms42fle138s" path="res://Jangada/jangada.glb" id="2_kcici"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0youm"]
+size = Vector3(11.93, 1, 24.335)
+
+[node name="Jangada" type="CharacterBody3D"]
+script = ExtResource("1_t78xo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_0youm")
+
+[node name="jangada2" parent="." instance=ExtResource("2_kcici")]
+transform = Transform3D(2.51452, 0, 0, 0, 1.07263, 0, 0, 0, 3.08244, 0.202975, 0.164681, 0.571848)

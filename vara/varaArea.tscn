@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpguqnlcj78t"]
+
+[ext_resource type="Script" path="res://pescaVaraArea.gd" id="1_3pjmp"]
+[ext_resource type="Script" path="res://stateMachiine.gd" id="2_1n85v"]
+[ext_resource type="Script" path="res://vara/waiting.gd" id="3_1e4xo"]
+[ext_resource type="Script" path="res://vara/fishing.gd" id="4_xuqxf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ymqlx"]
+size = Vector3(3.035, 3.34, 1)
+
+[node name="Node3D" type="StaticBody3D"]
+script = ExtResource("1_3pjmp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ymqlx")
+
+[node name="VaraStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_1n85v")
+initial_state = NodePath("Waiting")
+
+[node name="Waiting" type="Node" parent="VaraStateMachine"]
+script = ExtResource("3_1e4xo")
+
+[node name="Fishing" type="Node" parent="VaraStateMachine"]
+script = ExtResource("4_xuqxf")

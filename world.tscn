@@ -1,0 +1,81 @@
+[gd_scene load_steps=15 format=3 uid="uid://dtvxnsatgd30"]
+
+[ext_resource type="PackedScene" uid="uid://bpiiku4hiji51" path="res://Jangada/character_body_3d.tscn" id="1_uqhwv"]
+[ext_resource type="PackedScene" uid="uid://c71yokqw5t67y" path="res://Player/player.tscn" id="2_h3mwj"]
+[ext_resource type="PackedScene" uid="uid://dpguqnlcj78t" path="res://vara/varaArea.tscn" id="3_5wiph"]
+[ext_resource type="Script" path="res://World/static_body_3d.gd" id="3_bnbrp"]
+[ext_resource type="Script" path="res://World/static_body_3d_2.gd" id="4_i03gq"]
+[ext_resource type="PackedScene" uid="uid://dtvw01d0qeiqd" path="res://manzua/manzua.tscn" id="5_1vdxe"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6f5ph"]
+
+[sub_resource type="Sky" id="Sky_equ1n"]
+sky_material = SubResource("ProceduralSkyMaterial_6f5ph")
+
+[sub_resource type="Environment" id="Environment_lcopp"]
+background_mode = 2
+sky = SubResource("Sky_equ1n")
+ambient_light_source = 3
+ambient_light_color = Color(0.212305, 0.212305, 0.212305, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xvoto"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_x4k48"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mcyim"]
+size = Vector2(200, 200)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5q14d"]
+albedo_color = Color(0.415686, 0.917647, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a1wpk"]
+size = Vector3(200, 1, 200)
+
+[node name="world" type="Node2D"]
+
+[node name="Jangada" parent="." instance=ExtResource("1_uqhwv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.257125, 0)
+
+[node name="Manzua" parent="Jangada" instance=ExtResource("5_1vdxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.74163, 1.88723, 4.03322)
+
+[node name="Node3D" parent="Jangada" instance=ExtResource("3_5wiph")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.179111, 2.69986, -11.7362)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.951712, 0.306991, 0, -0.306991, 0.951712, 0, 2.66942, 4.63252)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lcopp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10444, 5.53888)
+script = ExtResource("3_bnbrp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4462)
+shape = SubResource("BoxShape3D_xvoto")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.46264)
+mesh = SubResource("BoxMesh_x4k48")
+
+[node name="Mar" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.08539, 0)
+script = ExtResource("4_i03gq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0328681, 0)
+mesh = SubResource("PlaneMesh_mcyim")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_5q14d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.437363, 0)
+shape = SubResource("BoxShape3D_a1wpk")
+
+[node name="Player" parent="." instance=ExtResource("2_h3mwj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3476, 0)
+
+[connection signal="interacted" from="StaticBody3D" to="StaticBody3D" method="_on_interacted"]
+[connection signal="input_event" from="Mar" to="Mar" method="_on_input_event"]

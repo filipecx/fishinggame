@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://gohnqjymvo16"]
+
+[ext_resource type="Script" path="res://fishingMinigame/fishing_minigame_ui.gd" id="1_m1r2s"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f3tyn"]
+
+[node name="Fishing MinigameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m1r2s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "0"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_f3tyn")
+layout_mode = 0
+offset_left = 353.0
+offset_top = 283.0
+offset_right = 671.0
+offset_bottom = 310.0
